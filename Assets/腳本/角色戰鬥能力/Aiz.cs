@@ -32,11 +32,14 @@ public class Aiz : MonoBehaviour
     TextMeshProUGUI 招式名稱;
     public GameObject 招式狀態顯示;
     TextMeshProUGUI 招式狀態說明;
-    public int 回合數 =0;
+    public 回合數 回合控制;
+    public int RountCount = 0 ;
+
+
     int Nowscene;
     void Start()
     {
-
+        
         光特效 = transform.Find("光特效1").gameObject;
         憤怒值 = 50;
         HP = HP上限;
@@ -49,25 +52,27 @@ public class Aiz : MonoBehaviour
         {
             Invoke("劍風盾", 6f);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         狀態欄4的HP伸縮控制.value = HP;
         狀態欄4的MP伸縮控制.value = MP;
         狀態欄4的AN伸縮控制.value = 憤怒值百分比;
 
         遊戲時間Float += Time.deltaTime;
         遊戲時間Int = (int)遊戲時間Float;
-
-
+        RountCount = 回合控制.我方回合數;
+        
     }
 
     void 劍風盾()
     {
-        回合數 += 1;
+        回合控制.我方回合數++;
+        回合控制.我方動作中 = true;
         StartCoroutine(顯示招式背景());
         StartCoroutine(劍風盾效果());
         招式名稱 = GameObject.Find("招式名稱").GetComponent<TextMeshProUGUI>();
@@ -82,6 +87,7 @@ public class Aiz : MonoBehaviour
         Invoke("變亮", 8f);
         Invoke("關閉光環", 8.3f);
         Invoke("劍風盾結束", 8.5f);
+        Invoke("動作完成", 8.5f);
     }
 
     void 劍風盾結束()
@@ -193,8 +199,13 @@ public class Aiz : MonoBehaviour
     IEnumerator 劍風盾效果()
     {
         防禦力 *= 1.5f;
-        yield return new WaitUntil(()=> 回合數>=3);
+        yield return new WaitUntil(()=> RountCount>=3);
         防禦力 /= 1.5f;
 
+    }
+
+    void 動作完成()
+    {
+        回合控制.我方動作中 = false;
     }
 }
