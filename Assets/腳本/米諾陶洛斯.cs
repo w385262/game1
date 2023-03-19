@@ -69,7 +69,7 @@ public class 米諾陶洛斯 : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
-    void 播放大吼音效()
+     void 播放大吼音效()
     {
         GetComponent<AudioSource>().PlayOneShot(音效管理[0]);
         Invoke("播放緊張音效", 4.5f);

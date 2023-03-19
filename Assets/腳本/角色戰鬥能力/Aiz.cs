@@ -50,7 +50,7 @@ public class Aiz : MonoBehaviour
         Nowscene = SceneManager.GetActiveScene().buildIndex;
         if (Nowscene == 9)
         {
-            Invoke("劍風盾", 6f);
+            Invoke("劍風盾", 13f);
         }
         
     }
@@ -193,7 +193,7 @@ public class Aiz : MonoBehaviour
     IEnumerator 顯示招式狀態背景()
     {
         招式狀態顯示.SetActive(true);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         招式狀態顯示.SetActive(false);
     }
     IEnumerator 劍風盾效果()
@@ -207,5 +207,6 @@ public class Aiz : MonoBehaviour
     void 動作完成()
     {
         回合控制.我方動作中 = false;
+        
     }
 }
