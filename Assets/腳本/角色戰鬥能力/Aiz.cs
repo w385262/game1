@@ -88,6 +88,7 @@ public class Aiz : MonoBehaviour
         Invoke("關閉光環", 8.3f);
         Invoke("劍風盾結束", 8.5f);
         Invoke("動作完成", 8.5f);
+        MP -= 200;
     }
 
     void 劍風盾結束()
